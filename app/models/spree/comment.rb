@@ -14,5 +14,5 @@ class Spree::Comment < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :commentable_id, :commentable_type, :user_id, :comment_type_id, :comment
-
+  validates :comment, :presence => true
 end
