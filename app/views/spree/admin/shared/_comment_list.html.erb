@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <% commentable.comments.reverse.each_with_index do |comment, index| %>
+    <% commentable.comments.where(:comment_type_id => 1).reverse.each_with_index do |comment, index| %>
       <tr class="<%= cycle('odd', 'even')%>">
         <td class='align-center'><%= pretty_time(comment.created_at) %></td>
         <td class='align-center'><%= comment.comment_type.try(:name) || 'None' %></td>
