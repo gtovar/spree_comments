@@ -4,7 +4,9 @@ class Spree::Admin::CommentsController < Spree::Admin::ResourceController
         @order_number = Spree::Order.find(params[:comment][:commentable_id])
         if @comment.save
             logger.debug @comment.inspect
-            Spree::CommentMailer.admin_respond(@comment.comment).deliver
+            if @comment.comment_type_id == 2
+                Spree::CommentMailer.admin_respond(@comment.comment,@order_number.user.login).deliver
+            end
             respond_to do |format|
                 logger.debug "=================================================================================="
                 format.html {redirect_to comments_admin_order_path(@order_number.number), notice: "Registrado exitosamente"}
