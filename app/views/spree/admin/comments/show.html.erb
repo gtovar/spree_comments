@@ -1,0 +1,11 @@
+<% content_for :page_actions do %>
+        <li><%= button_link_to t(:back_to_orders_list), admin_orders_path, :icon => 'icon-arrow-left' %></li>
+         <% end %>
+<%= render 'spree/admin/shared/order_tabs', :current => @name_class_css, :object => @order %>
+<h1>Comentario</h1>
+<h4>Usuario:</h4>
+<p><%= @comment.user.email %></p>
+<h4>Comentario</h4>
+<p><%= @comment.comment %></p>
+<h4>Tipo de comentario:</h4>
+<p><%= @comment.comment_type.name %></p>

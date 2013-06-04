@@ -10,24 +10,24 @@
 #
 
 Spree::Core::Engine.routes.prepend do
-  namespace :admin do
-    resources :comments
-    resources :comment_types
+    namespace :admin do
+        resources :comments
+        resources :comment_types
+        resources :orders do
+            member do
+                get :comments
+            end
 
-    resources :orders do
-      member do
-        get :comments
-      end
+            resources :shipments do
+                member do
+                    get :comments
+                end
+            end
+        end
+    match 'comments-without-read' => 'comments#comment_without_read', :as => "without_read"
+   end
 
-      resources :shipments do
-        member do
-         get :comments
-       end
-      end
-    end
-  end
-
-#match '/admin/comments' => 'admin/comments', :via => [:get, :post]
-#  match '/admin/comment_types' => 'admin/comment_types', :via => [:get, :post]
+    #match '/admin/comments' => 'admin/comments', :via => [:get, :post]
+    #  match '/admin/comment_types' => 'admin/comment_types', :via => [:get, :post]
 end
 

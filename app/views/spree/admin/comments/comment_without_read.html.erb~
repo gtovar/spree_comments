@@ -1,3 +1,12 @@
+<% content_for :page_title do %>
+  <%= t(:listing_comments_without_read) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <li><%= button_link_to t(:back_to_orders_list), admin_orders_path, :icon => 'icon-arrow-left' %></li>
+ <% end %>
+
+<%= params.inspect %>
 <table class="index">
   <colgroup>
     <col style="width: 18%" />
@@ -15,7 +24,7 @@
     </tr>
   </thead>
   <tbody>
-    <% commentable.comments.where(:comment_type_id => 1).reverse.each_with_index do |comment, index| %>
+    <% @comments.reverse.each_with_index do |comment, index| %>
       <tr class="<%= cycle('odd', 'even')%>">
         <td class='align-center'><%= pretty_time(comment.created_at) %></td>
         <td class='align-center'><%= comment.comment_type.try(:name) || 'None' %></td>
